@@ -1,0 +1,14 @@
+CC=emcc
+CFLAGS=-O2
+LINK=-O2 -s USE_SDL=2 -s USE_SDL_IMAGE=2 -s SDL2_IMAGE_FORMATS='["png"]' --preload-file files
+SRC=game.c sdl_driver.c main.c
+OBJ=$(SRC:.c=.bc)
+
+%.bc:	%.c
+	$(CC) $(CFLAGS) $< -o $@
+
+game.html: 	$(OBJ)
+	$(CC) $(LINK) $(OBJ) -o $@
+
+clean:
+	rm *.bc game.js game.html game.html.mem game.data

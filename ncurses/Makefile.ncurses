@@ -1,0 +1,14 @@
+CC=gcc
+CFLAGS=-O2 
+LINK=-O2 -lncurses
+SRC=game.c ncurses_driver.c main2.c
+OBJ=$(SRC:.c=.o)
+
+%.o:	%.c
+	$(CC) -c $(CFLAGS) $< 
+
+gametxt:	$(OBJ)
+	$(CC) $(OBJ) $(LINK) -o $@
+
+clean:
+	rm *.o gametxt
